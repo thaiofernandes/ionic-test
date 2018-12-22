@@ -16,9 +16,13 @@ export class HomePage {
     'Stout'
   ];
 
-  presentModal(){
+  addReceita(){
     const modal = this.modalCtrl.create(ReceitaPage);
     modal.present();
+
+    modal.onDidDismiss(data => {
+      this.items.push(data);
+    })
   }
 
   itemSelected(item: string) {

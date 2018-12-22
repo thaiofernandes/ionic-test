@@ -7,10 +7,10 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ReceitaPage } from '../pages/receita/receita';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ReceitaPageModule } from '../pages/receita/receita.module';
 
 @NgModule({
   declarations: [
@@ -18,11 +18,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    ReceitaPage
+    TabsPage
   ],
   imports: [
     BrowserModule,
+    ReceitaPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -31,8 +31,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage,
-    ReceitaPage
+    TabsPage
   ],
   providers: [
     StatusBar,
