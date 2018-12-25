@@ -7,8 +7,8 @@
 <ion-content padding>
   <button ion-button (click)="addReceita()">Add Receita</button>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemSelected(item)">
-      {{ item }}
+    <button ion-item *ngFor="let item of receitas" (click)="itemSelected(item)">
+      {{ item.descricaoReceita }}
     </button>  
   </ion-list>  
 </ion-content>

@@ -7,27 +7,108 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>receita</ion-title>
+    <ion-title>Cadastro</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-row>
-    <ion-col>
-      <ion-list inset>
-        <ion-item>
-          <ion-input placeholder="Tipo Cerveja" type="text" #tipoCerveja></ion-input>
-        </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <button ion-button class="submit-btn" (click)="salvar(tipoCerveja.value)" type="submit">Salvar
-      </button>
-    </ion-col>
-  </ion-row>
+  <form [formGroup]="receitaForm" (ngSubmit)="salvar(receitaForm.value)">
+    <ion-row>
+      <ion-col>
+        <ion-list inset>
+          <ion-card>
+              <ion-card-header>
+                  Receita
+              </ion-card-header>
+              <ion-card-content>
+                  <ion-item>
+                      <ion-label floating>Descrição</ion-label>
+                      <ion-input type="text" formControlName="descricaoReceita"></ion-input>
+                  </ion-item>  
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+              <ion-card-header>
+                  Rampas Brassagem
+              </ion-card-header>
+              <ion-card-content>
+                  <div formArrayName="rampasBrassagem" 
+                       *ngFor= "let rampa of receitaForm.get('rampasBrassagem').controls; let i = index;">
+                    <div [formGroupName] = "i">
+                      <ion-row>
+                          <ion-col width-50>
+                              <ion-item >
+                                <ion-label floating>Temperatura</ion-label>
+                                <ion-input type="text" formControlName="temperatura"></ion-input>
+                              </ion-item>  
+                          </ion-col>
+                          <ion-col width-50>
+                            <ion-item >
+                              <ion-label floating>Tempo Em Minutos</ion-label>
+                              <ion-input type="text" formControlName="tempo"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                      </ion-row>
+                      
+                    </div>
+                  </div>
+                  <ion-row > 
+                    <ion-col>
+                      <span ion-button float-right icon-left clear (click)="adicionarRampaBrassagem()">
+                        <ion-icon name="add"></ion-icon>
+                        Add
+                      </span>
+                    </ion-col>
+                  </ion-row>
+              </ion-card-content>
+          </ion-card>
+
+          <ion-card>
+              <ion-card-header>
+                  Rampas Fervura
+              </ion-card-header>
+              <ion-card-content>
+                  <div formArrayName="rampasFervura" 
+                       *ngFor= "let rampa of receitaForm.get('rampasFervura').controls; let i = index;">
+                    <div [formGroupName] = "i">
+                      <ion-row>
+                          <ion-col width-50>
+                              <ion-item >
+                                <ion-label floating>Temperatura</ion-label>
+                                <ion-input type="text" formControlName="temperatura"></ion-input>
+                              </ion-item>  
+                          </ion-col>
+                          <ion-col width-50>
+                            <ion-item >
+                              <ion-label floating>Tempo Em Minutos</ion-label>
+                              <ion-input type="text" formControlName="tempo"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                      </ion-row>
+                    </div>
+                    <ion-row > 
+                        <ion-col>
+                          <span ion-button float-right icon-left clear (click)="adicionarRampaFervura()">
+                            <ion-icon name="add"></ion-icon>
+                            Add
+                          </span>
+                        </ion-col>
+                      </ion-row>
+                  </div>
+              </ion-card-content>
+          </ion-card>
+          
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button class="submit-btn" type="submit" [disabled]="!receitaForm.valid">Salvar
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
 
 </ion-content>
