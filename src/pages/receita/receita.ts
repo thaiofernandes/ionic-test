@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, ViewController } from 'ionic-angular';
+import { NavController, IonicPage, ViewController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { DatePipe } from '@angular/common';
@@ -16,19 +16,34 @@ import { DatePipe } from '@angular/common';
   templateUrl: 'receita.html',
 })
 export class ReceitaPage {
-  private receitaForm : FormGroup;
-  private rampasBrassagem: FormArray;
-  private rampasFervura: FormArray;
+  receitaForm : FormGroup;
+  rampasBrassagem: FormArray;
+  rampasFervura: FormArray;
   private key;
+  private receita;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, private formBuilder: FormBuilder, private storage: Storage, private datepipe: DatePipe) {
+  constructor(public navCtrl: NavController, 
+              public viewCtrl: ViewController, 
+              private formBuilder: FormBuilder, 
+              private storage: Storage, 
+              private datepipe: DatePipe,
+              public params: NavParams) {
     this.key = this.datepipe.transform(new Date(), "ddMMyyyyHHmmss");
-    
-    this.receitaForm = this.formBuilder.group({
-      descricaoReceita: ['', Validators.required],
-      rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
-      rampasFervura: this.formBuilder.array([ this.criarRampaFervura() ])
-    });
+    this.receita = this.params.get("receita");
+    if(this.receita != null){
+      this.receitaForm = this.formBuilder.group({
+        descricaoReceita: [this.receita.descricaoReceita, Validators.required],
+        rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
+        rampasFervura: this.formBuilder.array([ this.criarRampaFervura() ])
+      });
+    }else{
+      this.receitaForm = this.formBuilder.group({
+        descricaoReceita: ['', Validators.required],
+        rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
+        rampasFervura: this.formBuilder.array([ this.criarRampaFervura() ])
+      });
+    }  
+     
   }
 
   

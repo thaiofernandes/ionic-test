@@ -1,11 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Connection
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-list>
+        <button ion-item *ngFor="let device of bluetoothDevices" (click)="itemSelected(device)">
+          {{ device.name }}
+        </button>  
+      </ion-list>
 </ion-content>

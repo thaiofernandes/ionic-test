@@ -17,7 +17,7 @@ export class HomePage {
     this.carregarReceitas();
   }
   
-  receitas: {}[];
+  receitas = new Array();
 
   addReceita(){
     const modal = this.modalCtrl.create(ReceitaPage);
@@ -28,8 +28,11 @@ export class HomePage {
     })
   }
 
-  itemSelected(item: string) {
+  itemSelected(item) {
     console.log("Selected Item", item);
+
+    const modal = this.modalCtrl.create(ReceitaPage, item);
+    modal.present();
   }
 
   private carregarReceitas(){

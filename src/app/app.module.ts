@@ -2,7 +2,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { DatePipe } from '@angular/common';
 import { MyApp } from './app.component';
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
@@ -38,7 +40,9 @@ import { ReceitaPageModule } from '../pages/receita/receita.module';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DatePipe,
+    BluetoothSerial
   ]
 })
 export class AppModule {}
