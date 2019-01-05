@@ -29,8 +29,14 @@ export class ReceitaPage {
               private datepipe: DatePipe,
               public params: NavParams) {
     this.key = this.datepipe.transform(new Date(), "ddMMyyyyHHmmss");
-    this.receita = this.params.get("receita");
-    if(this.receita != null){
+
+    this.receitaForm = this.formBuilder.group({
+      descricaoReceita: ['', Validators.required],
+      rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
+      rampasFervura: this.formBuilder.array([ this.criarRampaFervura() ])
+    });
+    //this.receita = this.params.get("receita");
+    /*if(this.receita != null){
       this.receitaForm = this.formBuilder.group({
         descricaoReceita: [this.receita.descricaoReceita, Validators.required],
         rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
@@ -42,7 +48,7 @@ export class ReceitaPage {
         rampasBrassagem: this.formBuilder.array([ this.criarRampaBrassagem() ]),
         rampasFervura: this.formBuilder.array([ this.criarRampaFervura() ])
       });
-    }  
+    } */ 
      
   }
 
